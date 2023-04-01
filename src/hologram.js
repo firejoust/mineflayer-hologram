@@ -1,8 +1,13 @@
-module.exports.inject = function inject(bot, ChatMessage) {
+module.exports.inject = function inject(ChatMessage) {
     return class Hologram {
-        constructor(data, position) {
-            this.components = data.map(string => new ChatMessage(string))
+        constructor(position, data) {
             this.position = position
+            // parse JSON from newer versions
+            try {
+                this.components = data.map(string => new ChatMessage(JSON.parse(string)))
+            } catch (e) {
+                this.components = data.map(string => new ChatMessage(string))
+            }
         }
 
         toString() {

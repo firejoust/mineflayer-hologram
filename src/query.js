@@ -1,7 +1,7 @@
 const Vec3 = require("vec3")
 
 module.exports.inject = function inject(bot, ChatMessage) {
-    const Hologram = require("./hologram").inject(bot, ChatMessage)
+    const Hologram = require("./hologram").inject(ChatMessage)
 
     return class Query {
         data = {}
@@ -16,13 +16,12 @@ module.exports.inject = function inject(bot, ChatMessage) {
                         key += Math.floor(entity.position.x) + ','
                         key += Math.floor(entity.position.z)
                         // armour stand has a display name
-                        if (entity.metadata[2].length > 0) {
-                            if (this.data[key]) {
-                                this.data[key][0].push(entity.position.y)
-                                this.data[key][1].push(entity.metadata[2])
-                            } else {
+                        if (entity.metadata[2]?.length > 0) {
+                            if (this.data[key] === undefined) {
                                 this.data[key] = [[],[]]
                             }
+                            this.data[key][0].push(entity.position.y)
+                            this.data[key][1].push(entity.metadata[2])
                         }
                     })
             }
@@ -51,12 +50,17 @@ module.exports.inject = function inject(bot, ChatMessage) {
                         sorted_str[i] = unsorted_str[largest]
                     }
 
+                    // split horizontal components
                     const pos = key.split(',')
 
+                    // set position to where the hologram starts
                     this.data[key] = new Hologram(
-                        sorted_str,
-                        new Vec3(Number(pos[0]), sorted_num[length - 1], Number(pos[1]))
-                            .offset(0.5, 0, 0.5) // where the hologram starts
+                        new Vec3(
+                            Number(pos[0]),
+                            sorted_num[length - 1],
+                            Number(pos[1])
+                        ).offset(0.5, 0, 0.5), 
+                        sorted_str
                     )
                 }
             }

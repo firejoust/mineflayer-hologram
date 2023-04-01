@@ -6,5 +6,5 @@ module.exports.plugin = function inject(bot) {
 }
 
 function Plugin(bot) {
-    this.Query = Query.inject(bot, ChatMessage(bot.majorVersion))
+    this.Query = Query.inject(bot, ChatMessage(bot.registry))
 }
