@@ -89,7 +89,7 @@ const string = hologram.toString()
 const motd = hologram.toMotd()
 
 /*
-  Returns the hologram as a string with terminal/console formatting.
+  Returns the hologram as a string with console formatting.
 */
 const ansi = hologram.toAnsi()
 console.log(ansi)
