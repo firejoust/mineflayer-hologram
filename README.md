@@ -7,7 +7,7 @@
 </div>
 
 ### Features
-- Get the nearest position of a hologram
+- Get the general position of a hologram
 - Query holograms from text, regex or a position
 - Extract text components from a hologram
 
