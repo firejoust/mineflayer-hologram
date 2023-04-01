@@ -1,7 +1,7 @@
 const Query = require("./src/query")
 const ChatMessage = require("prismarine-chat")
 
-module.exports.inject = function inject(bot) {
+module.exports.plugin = function inject(bot) {
     bot.hologram = new Plugin(bot)
 }
 
