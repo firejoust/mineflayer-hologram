@@ -1,6 +1,6 @@
 {
   "name": "mineflayer-hologram",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Represent holograms in mineflayer with high-level functionality",
   "main": "index.js",
   "scripts": {
