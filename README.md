@@ -41,8 +41,11 @@ bot.loadPlugin(hologram)
 ```js
 /*
   Creates structured data, allowing high level queries to be made
+
+  Arguments:
+  mobTypes (Object?) Key/value object mapping entity names to booleans (Entities used as holograms, defaults are "Armor Stand" and "Area Effect Cloud")
 */
-const Query = new bot.hologram.Query()
+const Query = new bot.hologram.Query(mobTypes?)
 
 /*
   Returns the first hologram matching the text. Returns null if nothing was found.
