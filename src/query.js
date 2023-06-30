@@ -1,16 +1,26 @@
 const Vec3 = require("vec3")
 
+const Defaults = {
+    mobTypes: {
+        "Armor Stand": true,
+        "Area Effect Cloud": true
+    }
+}
+
 module.exports.inject = function inject(bot, ChatMessage) {
     const Hologram = require("./hologram").inject(ChatMessage)
 
     return class Query {
+        mobTypes = Defaults.mobTypes
         data = {}
 
-        constructor() {
+        constructor(mobTypes) {
+            this.mobTypes = mobTypes || Defaults.mobTypes
+
             // create structured data from holograms
             {
                 Object.values(bot.entities)
-                    .filter(entity => entity.mobType === "Armor Stand")
+                    .filter(entity => this.mobTypes[entity.mobType])
                     .forEach(entity => {
                         let key = ""
                         key += Math.floor(entity.position.x) + ','
